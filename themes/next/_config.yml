@@ -46,7 +46,7 @@ index_with_subtitle: false
 menu:
   #home: /
   archives: /archives/
-  categories: /categories/
+  # categories: /categories/
   tags: /tags/
   about: /about/
   #sitemap: /sitemap.xml
@@ -161,7 +161,7 @@ social_icons:
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.jpg
 # in site  directory(source/uploads): /uploads/avatar.jpg
-avatar: /images/avatar.jpg
+avatar: /images/avatar1.jpg
 
 
 # Table Of Contents in the Sidebar
