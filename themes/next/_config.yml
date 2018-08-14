@@ -624,3 +624,11 @@ images: images
 
 # Theme version
 version: 5.1.1
+
+gitment:
+  enable: true
+  githubID: timbby
+  repo: timbby.github.io
+  ClientID: 7a9cfd7fca28d3ebb9e0
+  ClientSecret: 55d0bb7195b9bfc094293e96e81e2f9a27c35d3a
+  lazy: false
