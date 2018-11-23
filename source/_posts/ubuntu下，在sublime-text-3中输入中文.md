@@ -4,6 +4,7 @@ date: 2017-07-09 16:25:24
 tags:
  - ubuntu
  - sublime text 3
+ - 中文
 ---
 
 ### WHAT
