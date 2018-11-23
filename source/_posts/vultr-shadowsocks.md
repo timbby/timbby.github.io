@@ -54,4 +54,4 @@ IOS在APP Store搜索 ```SUPERWINGY``` 3块钱
 
 ### END
 
-<div style="font-size: 25px; font-weight: 3px; text-align: center;">未完待续……</div>
+至此就可以愉快的科学上网了
