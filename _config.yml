@@ -12,7 +12,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://timbby.github.io
+url: https://blog.timbby.top
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -72,3 +72,13 @@ deploy:
   type: git
   repo: git@github.com:timbby/timbby.github.io.git
   branch: master
+
+Plugins:
+- hexo-generator-baidu-sitemap
+- hexo-generator-sitemap
+
+baidusitemap:
+  path: baidusitemap.xml
+sitemap:
+  path: sitemap.xml
+
