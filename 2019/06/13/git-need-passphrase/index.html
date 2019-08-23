@@ -1,0 +1,721 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="git,passphrase," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="WHATgit操作远程分支(git pull,git push等)时提示enter passphrase for key &amp;#39;~/.ssh/id_rsa&amp;#39; WHY之前有同事操作git时，拉代码需要输入密码，然后用ide拉代码就没有问题，当时就没太在意。但是后来又遇到了同样的问题，这次是在服务器上配置的id_rsa，出现了同样的问题，每次都要输入密码，于是就查了一下解决办法。">
+<meta name="keywords" content="git,passphrase">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git操作远程分支(git pull,git push等)时提示enter passphrase for key &#39;~&#x2F;.ssh&#x2F;id_rsa&#39;">
+<meta property="og:url" content="https://blog.timbby.top/2019/06/13/git-need-passphrase/index.html">
+<meta property="og:site_name" content="timbby`s blog">
+<meta property="og:description" content="WHATgit操作远程分支(git pull,git push等)时提示enter passphrase for key &amp;#39;~/.ssh/id_rsa&amp;#39; WHY之前有同事操作git时，拉代码需要输入密码，然后用ide拉代码就没有问题，当时就没太在意。但是后来又遇到了同样的问题，这次是在服务器上配置的id_rsa，出现了同样的问题，每次都要输入密码，于是就查了一下解决办法。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-23T03:29:46.199Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git操作远程分支(git pull,git push等)时提示enter passphrase for key &#39;~&#x2F;.ssh&#x2F;id_rsa&#39;">
+<meta name="twitter:description" content="WHATgit操作远程分支(git pull,git push等)时提示enter passphrase for key &amp;#39;~/.ssh/id_rsa&amp;#39; WHY之前有同事操作git时，拉代码需要输入密码，然后用ide拉代码就没有问题，当时就没太在意。但是后来又遇到了同样的问题，这次是在服务器上配置的id_rsa，出现了同样的问题，每次都要输入密码，于是就查了一下解决办法。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://blog.timbby.top/2019/06/13/git-need-passphrase/"/>
+
+
+
+
+
+  <title>git操作远程分支(git pull,git push等)时提示enter passphrase for key '~/.ssh/id_rsa' | timbby`s blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">timbby`s blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://blog.timbby.top/2019/06/13/git-need-passphrase/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XiaoT">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="timbby`s blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">git操作远程分支(git pull,git push等)时提示enter passphrase for key '~/.ssh/id_rsa'</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-13T10:36:57+08:00">
+                2019-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="WHAT"><a href="#WHAT" class="headerlink" title="WHAT"></a>WHAT</h3><p>git操作远程分支(<strong>git pull</strong>,<strong>git push</strong>等)时提示<code>enter passphrase for key &#39;~/.ssh/id_rsa&#39;</code></p>
+<h3 id="WHY"><a href="#WHY" class="headerlink" title="WHY"></a>WHY</h3><p>之前有同事操作git时，拉代码需要输入密码，然后用ide拉代码就没有问题，当时就没太在意。但是后来又遇到了同样的问题，这次是在服务器上配置的id_rsa，出现了同样的问题，每次都要输入密码，于是就查了一下解决办法。</p>
+<a id="more"></a>
+<h3 id="HOW"><a href="#HOW" class="headerlink" title="HOW"></a>HOW</h3><p>原因应该是生成key的时候设置了密码，导致每次操作git都需要输入密码。然而很多小伙伴第一次生成key的时候都处于懵懵懂懂的状态（比如我），面对陌生的命令，莫名其妙就设置了密码，然后每次使用时都需要输入密码这个繁杂的操作。</p>
+<p>解决办法很简单，就是输入以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ssh-keygen -p [-P old_passphrase] [-N new_passphrase] [-f keyfile]</span><br></pre></td></tr></table></figure>
+<p>举个例子：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ssh-keygen -p -P 123456 -N '' -f ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
+<p>这样就把最开始无知的我们设置的’123456’密码改为了万能的’’密码，然后就可以无痛使用git pull等命令，再也不用输入密码了。</p>
+<h3 id="END"><a href="#END" class="headerlink" title="END"></a>END</h3><p>解决后发现，看起来很简单的问题，都来源于最初对工具的不熟悉。自己挖的坑还是要自己填~</p>
+<p>解决办法来自于<a href="https://stackoverflow.com/questions/21095054/ssh-key-still-asking-for-password-and-passphrase#answer-34800766" target="_blank" rel="noopener">stackoverflow</a></p>
+<p>至此，大功告成</p>
+<div style="font-size: 25px; font-weight: 3px; text-align: center;">未完待续……</div>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag"># git</a>
+          
+            <a href="/tags/passphrase/" rel="tag"># passphrase</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/01/openresty-redis-short-link/" rel="next" title="使用openresty和redis实现一个简单的短连接服务">
+                <i class="fa fa-chevron-left"></i> 使用openresty和redis实现一个简单的短连接服务
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/20/delete-jenkins-builds/" rel="prev" title="批量删除jenkins的构建历史">
+                批量删除jenkins的构建历史 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      
+        <div id="gitment-container"></div>
+      
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar1.jpg"
+               alt="XiaoT" />
+          <p class="site-author-name" itemprop="name">XiaoT</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#WHAT"><span class="nav-number">1.</span> <span class="nav-text">WHAT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WHY"><span class="nav-number">2.</span> <span class="nav-text">WHY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HOW"><span class="nav-number">3.</span> <span class="nav-text">HOW</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#END"><span class="nav-number">4.</span> <span class="nav-text">END</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XiaoT</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+   
+   
+   
+   
+   <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+   <script src="https://jjeejj.github.io/js/gitment.js"></script>
+   
+       <script type="text/javascript">
+           var gitment = new Gitment({
+               id: window.location.pathname.replace(/\W/g, '').substr(0,30), 
+               owner: 'timbby',
+               repo: 'timbby.github.io',
+               oauth: {
+                   client_id: '7a9cfd7fca28d3ebb9e0',
+                   client_secret: '55d0bb7195b9bfc094293e96e81e2f9a27c35d3a',
+               }});
+           gitment.render('gitment-container');
+       </script>
+   
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
