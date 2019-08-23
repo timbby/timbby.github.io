@@ -12,6 +12,16 @@ NexT.utils = NexT.$u = {
         var $image = $(this);
         var imageTitle = $image.attr('title');
         var $imageWrapLink = $image.parent('a');
+        
+        /**
+         * 图片前缀为"../images/"时，替换为"/images/"
+         * "../images/"为本地"_post"文件夹下markdown文件预览使用
+         * generate后的图片都在/images/下，所以做此替换
+         */
+        href = $image.attr('src');
+        if (href.indexOf('../images/') == 0) {
+          $image.attr('src', href.replace('../images/', '/images/'))
+        }
 
         if ($imageWrapLink.size() < 1) {
 	        var imageLink = ($image.attr('data-original')) ? this.getAttribute('data-original') : this.getAttribute('src');
