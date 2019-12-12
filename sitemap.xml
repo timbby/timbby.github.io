@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.timbby.top/2018/09/27/vultr-shadowsocks/</loc>
+    
+    <lastmod>2019-12-12T07:11:49.215Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.timbby.top/tags/index.html</loc>
     
     <lastmod>2019-08-23T03:29:46.203Z</lastmod>
@@ -30,13 +37,6 @@
   </url>
   
   <url>
-    <loc>https://blog.timbby.top/2018/09/27/vultr-shadowsocks/</loc>
-    
-    <lastmod>2019-08-23T03:29:46.201Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://blog.timbby.top/about/index.html</loc>
     
     <lastmod>2019-08-23T03:29:46.201Z</lastmod>
@@ -44,14 +44,14 @@
   </url>
   
   <url>
-    <loc>https://blog.timbby.top/2018/11/23/install-nvm/</loc>
+    <loc>https://blog.timbby.top/2017/07/07/hello-world/</loc>
     
     <lastmod>2019-08-23T03:29:46.200Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://blog.timbby.top/2017/07/07/hello-world/</loc>
+    <loc>https://blog.timbby.top/2018/11/23/install-nvm/</loc>
     
     <lastmod>2019-08-23T03:29:46.200Z</lastmod>
     
@@ -86,14 +86,14 @@
   </url>
   
   <url>
-    <loc>https://blog.timbby.top/2019/06/20/delete-jenkins-builds/</loc>
+    <loc>https://blog.timbby.top/2017/11/10/charles-online-hack/</loc>
     
     <lastmod>2019-08-23T03:29:46.199Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://blog.timbby.top/2017/11/10/charles-online-hack/</loc>
+    <loc>https://blog.timbby.top/2019/06/20/delete-jenkins-builds/</loc>
     
     <lastmod>2019-08-23T03:29:46.199Z</lastmod>
     

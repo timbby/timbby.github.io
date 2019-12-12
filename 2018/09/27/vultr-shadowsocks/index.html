@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="timbby`s blog">
 <meta property="og:description" content="WHAT在Vultr上购买VPS，搭建SS服务 WHY之前在服务器上搭了VPN，后来发现VPN极其不稳定，所以打算改用SS，所以记录一下配置过程">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-23T03:29:46.201Z">
+<meta property="og:updated_time" content="2019-12-12T07:11:49.215Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【搭梯子】购买服务器并搭建ss服务">
 <meta name="twitter:description" content="WHAT在Vultr上购买VPS，搭建SS服务 WHY之前在服务器上搭了VPN，后来发现VPN极其不稳定，所以打算改用SS，所以记录一下配置过程">
@@ -327,7 +327,7 @@
 <h3 id="HOW"><a href="#HOW" class="headerlink" title="HOW"></a>HOW</h3><h4 id="购买VPS"><a href="#购买VPS" class="headerlink" title="购买VPS"></a>购买VPS</h4><p>在<a href="https://www.vultr.com/?ref=7404275" target="_blank" rel="noopener">Vultr</a>上购买VPS，最低3.5$/月，1核，512M内存，20G SSD，500G流量。</p>
 <h4 id="安装shadowsocks"><a href="#安装shadowsocks" class="headerlink" title="安装shadowsocks"></a>安装shadowsocks</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get install python-pip //安装pip</span><br><span class="line">pip install shadowsocks // 通过pip安装shadowsocks</span><br></pre></td></tr></table></figure>
 <h4 id="配置shadowsocks"><a href="#配置shadowsocks" class="headerlink" title="配置shadowsocks"></a>配置shadowsocks</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/shadowsocks.json // shadowsocks配置文件</span><br></pre></td></tr></table></figure>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//===========配置文件内容============</span><br><span class="line">&#123;</span><br><span class="line">  "server": "0.0.0.0", // 服务ip，固定写0.0.0.0</span><br><span class="line">  "server_port": 1123, // 服务端口，1024以上自选</span><br><span class="line">  "password": "150423", // 客户端链接用的密码</span><br><span class="line">  "method": "aes-256-cfb" // 加密协议</span><br><span class="line">&#125;</span><br><span class="line">//=================================</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//===========配置文件内容============</span><br><span class="line">&#123;</span><br><span class="line">  "server": "0.0.0.0", // 服务ip，固定写0.0.0.0</span><br><span class="line">  "server_port": 5555, // 服务端口，1024以上自选</span><br><span class="line">  "password": "123456", // 客户端链接用的密码</span><br><span class="line">  "method": "aes-256-cfb" // 加密协议</span><br><span class="line">&#125;</span><br><span class="line">//=================================</span><br></pre></td></tr></table></figure>
 <h4 id="关闭防火墙，启动SS服务"><a href="#关闭防火墙，启动SS服务" class="headerlink" title="关闭防火墙，启动SS服务"></a>关闭防火墙，启动SS服务</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssserver -c /etc/shadowsocks.json -d start // 开启shadowsocks服务</span><br><span class="line">systemctl stop firewalld.service // 关闭防火墙</span><br></pre></td></tr></table></figure>
 <h4 id="客户端下载"><a href="#客户端下载" class="headerlink" title="客户端下载"></a>客户端下载</h4><p>IOS在APP Store搜索 <code>SUPERWINGY</code> 3块钱<br><a href="https://github.com/shadowsocks/ShadowsocksX-NG/releases/download/v1.7.1/ShadowsocksX-NG.1.7.1.zip" target="_blank" rel="noopener">MAC下载地址</a></p>
 <h3 id="END"><a href="#END" class="headerlink" title="END"></a>END</h3><p>至此就可以愉快的科学上网了</p>
@@ -478,7 +478,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
